@@ -9,7 +9,6 @@
 #include "libs\cursorTool\cursorTool.h"
 progressBar encrypt;
 timer myTimer;
-cursorTool cursor;
 
 using namespace std;
 
@@ -28,6 +27,7 @@ void showBar();
 
 int main(int argc, char *argv[])
 {
+    cout << "-----OPERATION_DETAILS-----" << "\n";
     rawPath = {argv[argc - 1]};
     cout << "INPUT_FILE_PATH: " << rawPath << endl;
     cout << "KEY: ", cin >> rawKey;
@@ -36,9 +36,9 @@ int main(int argc, char *argv[])
     thread t1(fCipher, rawPath, key);
     showBar();
     t1.join();
-    cursor.setVisibility(true);
+    curVisible(true);
     cout << "\n"
-         << endl
+         << "\n"
          << "OPERATION_COMPLETE..."
          << "\n"
          << "PRESS_ANY_KEY_TO_EXIT..." << ends;
@@ -61,8 +61,14 @@ void fCipher(string file, int code)
         outPath = file.substr(0, file.find_last_of("\\") + 1) + "encrypted_" + file.substr(file.find_last_of("\\") + 1, file.length());
     }
     cout << "OUTPUT_FILE_PATH: " << outPath << endl
-         << "OPERATION_TYPE: " << ((mode == ENCR) ? "ENCRYPT_FILE" : "DECRYPT_FILE")
+         << "OPERATION_TYPE: " << ((mode == ENCR) ? "ENCRYPT_FILE" : "DECRYPT_FILE") << "\n"
          << endl;
+
+    cout << "-----OPERATION_PROGRESS-----"
+         << "\n";
+    cout << "STARTING_OPERATION..."
+         << "\n"
+         << endl; // extra blank line reserved for progress bar complex
 
     ifstream fin(file, ios::binary);
     fin.seekg(0, fin.end);
@@ -70,9 +76,8 @@ void fCipher(string file, int code)
     fin.seekg(0, fin.beg);
 
     ofstream fout(outPath, ios::binary);
-    cursor.setVisibility(false);
+    curVisible(false);
     myTimer.start();
-    cout << "STARTING_OPERATION..." << endl;
     ready = true;
     while (fin.get(rawTemp))
     {
@@ -91,7 +96,7 @@ void showBar()
     }
     while (progress < encrypt.max)
     {
-        cursor.yAxisMov(1);
+        curMovY(1);
         encrypt.update(progress);
         cout << endl;
         auto rate = progress / myTimer.elapsedSec();
@@ -99,7 +104,8 @@ void showBar()
         int hLeft = tLeft / 3600;
         auto mLeft = ((long)tLeft % 3600) / 60;
         auto sLeft = ((long)tLeft % 3600) % 60;
-        cout << "TIME REMAINING: " << hLeft << "hrs " << mLeft << "mins " << sLeft << "secs"
+        cout << progress << " / " << encrypt.max << "KB COMPLETED | "
+             << "TIME_REMAINING: " << hLeft << "hrs " << mLeft << "mins " << sLeft << "secs"
              << " | SPEED: " << setprecision(1) << fixed << rate / 1000 << "KBps" << setw(1);
         this_thread::sleep_for(chrono::milliseconds(125));
     }
