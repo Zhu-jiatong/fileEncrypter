@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "iomanip": "cpp",
+        "chrono": "cpp",
+        "iosfwd": "cpp",
+        "ostream": "cpp",
+        "xiosbase": "cpp",
+        "xstring": "cpp",
+        "xlocale": "cpp",
+        "charconv": "cpp",
+        "memory": "cpp",
+        "sstream": "cpp",
+        "xhash": "cpp",
+        "xlocnum": "cpp",
+        "thread": "cpp",
+        "string": "cpp"
+    }
+}

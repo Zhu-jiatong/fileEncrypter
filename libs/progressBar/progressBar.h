@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <iomanip>
-#include <Windows.h>
 
 using namespace std;
 
@@ -13,7 +12,7 @@ public:
 	void update(long float val);
 
 	int charNo{};
-	unsigned long long max{};
+	long long max{};
 };
 
 #endif
