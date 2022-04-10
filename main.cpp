@@ -72,7 +72,8 @@ void showBar()
         long hLeft = tLeft / 3600;
         int mLeft = ((long)tLeft % 3600) / 60;
         int sLeft = ((long)tLeft % 3600) % 60;
-        cout << "TIME_REMAINING: " << hLeft << "hrs " << mLeft << "mins " << sLeft << "secs"
+        cout << myCipher.progress / 1000 << " / " << encrypt.max / 1000 << "KBs COMPLETED | "
+             << "TIME_REMAINING: " << hLeft << "hrs " << mLeft << "mins " << sLeft << "secs"
              << " | SPEED: " << setprecision(1) << fixed << rate / 1000 << "KBps" << ends;
 
         this_thread::sleep_for(chrono::milliseconds(150));
