@@ -14,7 +14,5 @@ void progressBar::update(long float val)
 	float perc = (val / max) * 100;
 	int intPerc = perc;
 	cout << loadIco[charNo] << "[" << setw(intPerc) << setfill('#') << " " << setprecision(1) << fixed << perc << "%";
-	cout << setw(100 - intPerc - 1) << setfill('-') << " "
-		 << "]"
-		 << " \n";
+	cout << setw(100 - intPerc - 1) << setfill('-') << " ] \n";
 }
