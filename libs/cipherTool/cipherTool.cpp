@@ -34,8 +34,8 @@ void cipherTool::encrypt(string key)
     char charTemp;
     for (long long i(0); fin.get(charTemp); ++i)
     {
-        charTemp += int(key[i % key.length()]);                      // caesar
-        charTemp = charTemp ^ key[i % (sizeof(key) / sizeof(char))]; // XOR
+        charTemp += int(key[i % key.length()]);      // caesar
+        charTemp = charTemp ^ key[i % key.length()]; // XOR
         fout.put(charTemp);
         progress = i;
     }
@@ -46,8 +46,8 @@ void cipherTool::decrypt(string key)
     char charTemp;
     for (long long i(0); fin.get(charTemp); ++i)
     {
-        charTemp = charTemp ^ key[i % (sizeof(key) / sizeof(char))]; // XOR
-        charTemp -= int(key[i % key.length()]);                      // reverse caesar
+        charTemp = charTemp ^ key[i % key.length()]; // XOR
+        charTemp -= int(key[i % key.length()]);      // reverse caesar
         fout.put(charTemp);
         progress = i;
     }
