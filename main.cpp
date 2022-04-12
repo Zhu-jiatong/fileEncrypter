@@ -3,7 +3,6 @@
 #include <string>
 #include <Thread>
 #include <chrono>
-#include <conio.h>
 #include "libs\progressBar\progressBar.h"
 #include "libs\timer\timer.h"
 #include "libs\cursorTool\cursorTool.h"
@@ -33,7 +32,7 @@ int main(int argc, char *argv[])
      cout << "\n\n"
           << "OPERATION_COMPLETE...\n"
           << "PRESS_ANY_KEY_TO_EXIT..." << ends;
-     getch();
+     cin.get();
      return 0;
 }
 
