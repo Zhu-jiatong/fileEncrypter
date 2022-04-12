@@ -3,10 +3,7 @@
 #include <string>
 #include <Thread>
 #include <chrono>
-#include "libs\progressBar\progressBar.h"
-#include "libs\timer\timer.h"
-#include "libs\cursorTool\cursorTool.h"
-#include "libs\cipherTool\cipherTool.h"
+#include "libs\myLibs.h"
 cipherTool myCipher;
 progressBar encrypt;
 timer myTimer;
