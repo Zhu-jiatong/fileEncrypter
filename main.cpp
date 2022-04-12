@@ -24,14 +24,13 @@ int main(int argc, char *argv[])
      rawPath = {argv[argc - 1]};
      cout << "INPUT_FILE_PATH: " << rawPath << '\n';
      cout << "KEY: ", getline(cin, rawKey);
-     cout << "APPLIED_KEY: [" << rawKey << "]" << '\n';
+     cout << "APPLIED_KEY: [" << rawKey << "]\n";
      thread t1(fCipher, rawPath, rawKey);
      showBar();
      t1.join();
      curVisible(true);
      cout << "\n\n"
-          << "OPERATION_COMPLETE...\n"
-          << "PRESS_ANY_KEY_TO_EXIT..." << ends;
+          << "OPERATION COMPLETE, PRESS ENTER TO EXIT...";
      cin.get();
      return 0;
 }
@@ -58,16 +57,7 @@ void showBar()
      while (!myCipher.done)
      {
           curMovY(1);
-          encrypt.update(myCipher.progress);
-          auto rate = myCipher.progress / myTimer.elapsedSec();
-          long tLeft = (encrypt.max - myCipher.progress) / rate;
-          long hLeft = tLeft / 3600;
-          int mLeft = ((long)tLeft % 3600) / 60;
-          int sLeft = ((long)tLeft % 3600) % 60;
-          cout << myCipher.progress / 1000 << " / " << encrypt.max / 1000 << "KBs COMPLETED | "
-               << "TIME_REMAINING: " << hLeft << "hrs " << mLeft << "mins " << sLeft << "secs"
-               << " | SPEED: " << setprecision(1) << fixed << rate / 1000 << "KBps" << ends;
-
+          encrypt.update(myCipher.progress, myTimer.elapsedSec());
           this_thread::sleep_for(chrono::milliseconds(150));
      }
 }

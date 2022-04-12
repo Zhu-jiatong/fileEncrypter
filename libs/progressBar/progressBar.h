@@ -9,7 +9,7 @@ using namespace std;
 class progressBar
 {
 public:
-	void update(long float val);
+	void update(long float &val, long long time);
 
 	int charNo{};
 	long long max{};
